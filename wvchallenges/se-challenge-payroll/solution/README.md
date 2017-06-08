@@ -74,13 +74,13 @@ Following the DDD pattern, the relevant entities are:
     "workGroup": [
       {
         "id": 10,
-        "categoty": "A",
+        "category": "A",
         "name": "Junior",
         "rate": 20.0
       },
       {
         "id": 20,
-        "categoty": "B",
+        "category": "B",
         "name": "Senior",
         "rate": 30.0
       }
@@ -97,11 +97,17 @@ Following the DDD pattern, the relevant entities are:
     "employee": [
       {
         "id": 1,
-        "name": "Jerry"
+        "first_name": "Jerry",
+        "last_name": "Land",
+        "gender": "Male",
+        "description": ""
       },
       {
         "id": 2,
-        "name": "Larry"
+        "name": "Larry",
+        "last_name": "Ocean",
+        "gender": "unknown",
+        "description": ""
       }
     ]
   }
