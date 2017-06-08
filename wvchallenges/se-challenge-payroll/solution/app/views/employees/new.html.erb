@@ -1,0 +1,33 @@
+<h1>New Employee</h1>
+
+<%= form_for @employee, url: employees_path do |f| %>
+  <p>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </p>
+ 
+  <p>
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </p>
+
+  <p>
+    <%= f.label :gender %><br>
+
+    <%= f.radio_button :gender, 'unknown', :checked => true %> 
+    <%= label :gender_unknown, 'Unknown' %>
+    <%= f.radio_button :gender, 'male' %>
+    <%= label :gender_male, 'Male' %>
+    <%= f.radio_button :gender, 'female' %>
+    <%= label :gender_female, 'Female' %>
+  </p>
+
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

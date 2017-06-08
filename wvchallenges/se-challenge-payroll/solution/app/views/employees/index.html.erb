@@ -1,0 +1,22 @@
+<h1>Employees</h1>
+
+<div class="Table">
+  <div class="Table-row Table-header">
+    <div class="Table-row-item">Employee ID</div>
+    <div class="Table-row-item">Name</div>
+    <div class="Table-row-item">Gender</div>
+    <div class="Table-row-item">Description</div>
+  </div>
+<% @employees.each do |employee| %>
+  <div class="Table-row">
+    <div class="Table-row-item" data-header="Employee ID"><%= employee.id %></div>
+    <div class="Table-row-item" data-header="Name"><%= employee.first_name %> <%= employee.last_name %></div>
+    <div class="Table-row-item" data-header="Gender"><%= employee.gender %></div>
+    <div class="Table-row-item" data-header="Description"><%= employee.description %></div>
+  </div>
+<% end %>
+</div>
+
+<div>
+  <%= link_to 'New Employee', :controller => 'employees', :action => 'new' %>
+</div>
