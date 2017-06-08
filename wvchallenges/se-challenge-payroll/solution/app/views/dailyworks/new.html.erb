@@ -1,0 +1,27 @@
+<h1>New dailywork</h1>
+
+<%= form_for @dailywork, url: dailyworks_path do |f| %>
+  <p>
+    <%= f.label :employee_id %><br>
+    <%= f.text_field :employee_id %>
+  </p>
+ 
+  <p>
+    <%= f.label :date %><br>
+    <%= f.text_field :date %>
+  </p>
+
+  <p>
+    <%= f.label :hours %><br>
+    <%= f.text_field :hours %>
+  </p>
+
+  <p>
+    <%= f.label :workgroup_id %><br>
+    <%= f.text_field :workgroup_id %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

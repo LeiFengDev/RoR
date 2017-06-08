@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'payment/index'
   get "payment" => "payment#index"
 
-  resources :employees
+  resources :employees, :workgroups, :dailyworks
 
   root 'payment#index'
 

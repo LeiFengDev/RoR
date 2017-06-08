@@ -1,0 +1,22 @@
+<h1>Work Groups</h1>
+
+<div class="Table">
+  <div class="Table-row Table-header">
+    <div class="Table-row-item">Group ID</div>
+    <div class="Table-row-item">Category</div>
+    <div class="Table-row-item">Name</div>
+    <div class="Table-row-item">Rate</div>
+  </div>
+<% @workgroups.each do |group| %>
+  <div class="Table-row">
+    <div class="Table-row-item" data-header="Group ID"><%= group.id %></div>
+    <div class="Table-row-item" data-header="Category"><%= group.category %></div>
+    <div class="Table-row-item" data-header="Name"><%= group.name %></div>
+    <div class="Table-row-item" data-header="Rate"><%= group.rate %></div>
+  </div>
+<% end %>
+</div>
+
+<div>
+  <%= link_to 'New work group', :controller => 'workgroups', :action => 'new' %>
+</div>
