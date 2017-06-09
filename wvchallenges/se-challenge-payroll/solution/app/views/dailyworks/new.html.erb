@@ -2,7 +2,7 @@
 
 <%= form_for @dailywork, url: dailyworks_path do |f| %>
   <p>
-    <%= f.label :employee_id %><br>
+    <%= f.label :employee_id, "Employee ID" %><br>
     <%= f.text_field :employee_id %>
   </p>
  
@@ -17,8 +17,13 @@
   </p>
 
   <p>
-    <%= f.label :workgroup_id %><br>
+    <%= f.label :workgroup_id, "Group ID" %><br>
     <%= f.text_field :workgroup_id %>
+  </p>
+
+  <p>
+    <%= f.label :report_id, "Report ID" %><br>
+    <%= f.text_field :report_id %>
   </p>
 
   <p>

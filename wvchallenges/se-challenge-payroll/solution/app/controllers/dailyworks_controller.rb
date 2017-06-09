@@ -19,6 +19,6 @@ class DailyworksController < ApplicationController
   private
 
   def dailywork_params
-    params.require(:dailywork).permit(:employee_id, :workgroup_id, :date, :hours)
+    params.require(:dailywork).permit(:employee_id, :workgroup_id, :date, :hours, :report_id)
   end
 end
