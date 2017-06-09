@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  employee_id: 1
-  workgroup_id: 1
-  date: 2017-06-08
+  employee: one
+  workgroup: one
+  date: 2017-06-08 22:03:48
   hours: 1.5
 
 two:
-  employee_id: 1
-  workgroup_id: 1
-  date: 2017-06-08
+  employee: two
+  workgroup: two
+  date: 2017-06-08 22:03:48
   hours: 1.5
