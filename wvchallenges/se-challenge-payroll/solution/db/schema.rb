@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609020153) do
+ActiveRecord::Schema.define(version: 20170609031935) do
 
   create_table "dailyworks", force: :cascade do |t|
     t.integer "employee_id"
@@ -19,7 +19,9 @@ ActiveRecord::Schema.define(version: 20170609020153) do
     t.float "hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "report_id"
     t.index ["employee_id"], name: "index_dailyworks_on_employee_id"
+    t.index ["report_id"], name: "index_dailyworks_on_report_id"
     t.index ["workgroup_id"], name: "index_dailyworks_on_workgroup_id"
   end
 

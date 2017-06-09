@@ -34,44 +34,50 @@ Therefore, the picked solution is consist of:
 
 Following the DDD pattern, the relevant entities are:
 
-* dailyWork
+* dailywork
 
   All the "time report" data essentially present the works done by employees in daily based hours. Even though the requirements mentions every employees belong to specific "Job Group", it doesn't mean one employee cannot move to another group. It's the work which has been done directly connects to a group.
 
-  The dailyWork entity should look like:
+  The dailywork entity should look like:
 
   ```
   {
-    "dailyWork": [
+    "dailywork": [
       {
-        "employeeId": 1,
+        "id": 1,
+        "employee_id": 1,
         "date": "2017-01-02T05:00:00.000Z",
         "hours": 3.5,
-        "groupId": 10
+        "group_id": 10,
+        "report_id": 40
       },
       {
-        "employeeId": 1,
+        "id": 2,
+        "employee_id": 1,
         "date": "2017-01-10T05:00:00.000Z",
         "hours": 2,
-        "groupId": 20
+        "group_id": 20,
+        "report_id": 40
       },
       {
-        "employeeId": 2,
+        "id": 3,
+        "employee_id": 2,
         "date": "2017-01-02T05:00:00.000Z",
         "hours": 8,
-        "groupId": 20
+        "group_id": 20,
+        "report_id": 40
       }
     ]
   }
   ```
 
-* workGroup
+* workgroup
 
-  The entity workGroup defines the rate of the work:
+  The entity workgroup defines the rate of the work:
 
   ```
   {
-    "workGroup": [
+    "workgroup": [
       {
         "id": 10,
         "category": "A",
@@ -117,16 +123,16 @@ There are 3 corresponding tables to store the entity data loaded from the input 
 
 ## Business model design
 
-* timeSheet
+* timesheet
 
-  Use timeSheet model to parse and validate the input working time records. It decouples the input data and entities, and can provide more variants to support different types of time records in the future.
+  Use timesheet model to parse and validate the input working time records. It decouples the input data and entities, and can provide more variants to support different types of time records in the future.
 
   ```
   {
-    "timeSheet": [
+    "timesheet": [
       {
         "reportId": 40,
-        "record": [
+        "records": [
           {
             "date": "2016-11-04T04:00:00.000Z",
             "hours": 10.0,
@@ -166,7 +172,7 @@ There are 3 corresponding tables to store the entity data loaded from the input 
   {
     "payment": [
       {
-        "employeeId": 1,
+        "employee_id": 1,
         "payStub": [
           {
             "ordinal": 1,
@@ -213,8 +219,8 @@ There are 3 corresponding tables to store the entity data loaded from the input 
 
 ## MVC routing
 
-* TimeSheet/index
-* Payment/index
+* timesheet/index
+* payment/index
 
 ## Dev/Test environment
 
