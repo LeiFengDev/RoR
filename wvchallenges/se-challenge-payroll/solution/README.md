@@ -36,9 +36,9 @@ Following the DDD pattern, the relevant entities are:
 
 * timesheet_status
 
-  After read and imported a "time report" file, the file importing result needs to be logged into storage. MongoDB is a good choice; in this project the log will be saved into Sqlite db directly to save the cost of both db management and deploy management.
+  After read and imported a "time report" file, the file importing result needs to be logged into storage. MongoDB is a good choice; in this project the log will be saved into Sqlite db directly to save the cost of both db management and deploy management. The records with "status" field has success (1) value will be used to prevent same report_id file imported twice.
 
-  the timesheet_status enttity should look like:
+  The timesheet_status entity should look like:
 
   ```
   {
