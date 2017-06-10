@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  report_id: 1
+  process_time: 2017-06-09 23:38:47
+  status: 1
+  error: 1
+
+two:
+  report_id: 1
+  process_time: 2017-06-09 23:38:47
+  status: 1
+  error: 1
