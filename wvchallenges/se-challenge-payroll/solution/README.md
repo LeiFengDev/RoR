@@ -34,6 +34,28 @@ Therefore, the picked solution is consist of:
 
 Following the DDD pattern, the relevant entities are:
 
+* timesheet_status
+
+  After read and imported a "time report" file, the file importing result needs to be logged into storage. MongoDB is a good choice; in this project the log will be saved into Sqlite db directly to save the cost of both db management and deploy management.
+
+  the timesheet_status enttity should look like:
+
+  ```
+  {
+    "timesheetStatus": [
+      {
+        "id": 100,
+        "report_id": 40   // indexed
+        "process_time": "2017-01-02T05:00:00.000Z",
+        "status": "success",  // int/enum {unknown|success|failure}
+        "error": 0,   // int/enum {nil|duplicate report|wrong format|new employee|new group|db error|...}
+        "employees": [1,2,3,5,7,11],
+        "workgroups": [1,2]
+      }
+    ]
+  }
+  ```
+
 * dailywork
 
   All the "time report" data essentially present the works done by employees in daily based hours. Even though the requirements mentions every employees belong to specific "Job Group", it doesn't mean one employee cannot move to another group. It's the work which has been done directly connects to a group.
@@ -121,7 +143,7 @@ Following the DDD pattern, the relevant entities are:
 
 There are 3 corresponding tables to store the entity data loaded from the input file.
 
-## Business model design
+## Business/view model design
 
 * timesheet
 
@@ -132,7 +154,8 @@ There are 3 corresponding tables to store the entity data loaded from the input 
     "timesheet": [
       {
         "reportId": 40,
-        "records": [
+        "processTime": "2017-06-02T05:00:00.000Z",
+        "records": [  // corresponding to dailywork
           {
             "date": "2016-11-04T04:00:00.000Z",
             "hours": 10.0,
