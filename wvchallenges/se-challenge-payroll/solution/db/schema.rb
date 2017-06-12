@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170610044928) do
+ActiveRecord::Schema.define(version: 20170611033442) do
 
   create_table "dailyworks", force: :cascade do |t|
     t.integer "employee_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170610044928) do
     t.text "workgroups"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "filename", null: false
     t.index ["report_id"], name: "index_timesheet_statuses_on_report_id"
   end
 
