@@ -1,0 +1,81 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Rails server",
+      "type": "Ruby",
+      "request": "launch",
+      "cwd": "${workspaceRoot}/se-challenge-payroll/solution/bin",
+      "showDebuggerOutput": true,
+      "useBundler": true,
+      "pathToRDebugIDE": "/home/fvl/.rvm/gems/ruby-2.4.1/gems/ruby-debug-ide-0.6.0/bin/rdebug-ide",
+      "program": "/home/fvl/.rvm/gems/ruby-2.4.1/bin/bundle",
+      "args": [
+        "exec",
+        "rails",
+        "s"
+      ]
+    },
+    {
+      "name": "Debug Local File",
+      "type": "Ruby",
+      "request": "launch",
+      "cwd": "${workspaceRoot}/se-challenge-payroll/solution/bin",
+      "program": "${workspaceRoot}/se-challenge-payroll/solution",
+      "showDebuggerOutput": true,
+      "useBundler": true,
+      "pathToBundler": "/home/fvl/.rvm/gems/ruby-2.4.1/bin/bundle",
+      "pathToRDebugIDE": "${workspaceRoot}/se-challenge-payroll/solution/bin/rdebug-ide",
+      "env": {
+        "PATH": "/home/fvl/.rvm/gems/ruby-2.4.1/bin:/home/fvl/.rvm/gems/ruby-2.4.1@global/bin:/home/fvl/.rvm/rubies/ruby-2.4.1/bin:/home/fvl/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/home/fvl/.rvm/bin",
+        "rvm_prefix": "/home/fvl",
+        "rvm_path": "/home/fvl/.rvm",
+        "rvm_bin_path": "/home/fvl/.rvm/bin",
+        "GEM_HOME": "/home/fvl/.rvm/gems/ruby-2.4.1",
+        "GEM_PATH": "/home/fvl/.rvm/gems/ruby-2.4.1:/home/fvl/.rvm/gems/ruby-2.4.1@global",
+        "MY_RUBY_HOME": "/home/fvl/.rvm/rubies/ruby-2.4.1",
+        "IRBRC": "/home/fvl/.rvm/rubies/ruby-2.4.1/.irbrc",
+        "RUBY_VERSION": "ruby-2.4.1"
+     }
+    },
+    {
+      "name": "Listen for rdebug-ide",
+      "type": "Ruby",
+      "request": "attach",
+      "cwd": "${workspaceRoot}/se-challenge-payroll/solution",
+      "remoteHost": "127.0.0.1",
+      "remotePort": "1234",
+      "remoteWorkspaceRoot": "${workspaceRoot}"
+    },
+    {
+      "name": "RSpec - all",
+      "type": "Ruby",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/se-challenge-payroll/solution/bin/rspec",
+      "args": [
+        "-I",
+        "${workspaceRoot}"
+      ]
+    },
+    {
+      "name": "RSpec - active spec file only",
+      "type": "Ruby",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/se-challenge-payroll/solution/bin/rspec",
+      "args": [
+        "-I",
+        "${workspaceRoot}",
+        "${file}"
+      ]
+    },
+    {
+      "name": "Cucumber",
+      "type": "Ruby",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/se-challenge-payroll/solution/bin/cucumber"
+    }
+  ]
+}
