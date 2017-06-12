@@ -45,12 +45,13 @@ Following the DDD pattern, the relevant entities are:
     "timesheetStatus": [
       {
         "id": 100,
-        "report_id": 40   // indexed
-        "process_time": "2017-01-02T05:00:00.000Z",
+        "report_id": 40   // indexed, > 0
+        "process_time": "2017-01-02T05:00:00.000Z",   // not null
         "status": "success",  // int/enum {unknown|success|failure}
-        "error": 0,   // int/enum {nil|duplicate report|wrong format|new employee|new group|db error|...}
+        "error": 0,   // int/enum {no error|duplicate report|wrong format|employee not found|workgroup not found|db error|...}
         "employees": [1,2,3,5,7,11],
-        "workgroups": [1,2]
+        "workgroups": [1,2],
+        "filename": "2017-01-02T05:00:00.000Z_timesheet1.csv"   // not null
       }
     ]
   }
@@ -67,11 +68,11 @@ Following the DDD pattern, the relevant entities are:
     "dailywork": [
       {
         "id": 1,
-        "employee_id": 1,
-        "date": "2017-01-02T05:00:00.000Z",
-        "hours": 3.5,
-        "group_id": 10,
-        "report_id": 40
+        "employee_id": 1,   // FK
+        "date": "2017-01-02T05:00:00.000Z",   // not null
+        "hours": 3.5,     // > 0
+        "group_id": 10,   // FK
+        "report_id": 40   // > 0
       },
       {
         "id": 2,
@@ -102,9 +103,9 @@ Following the DDD pattern, the relevant entities are:
     "workgroup": [
       {
         "id": 10,
-        "category": "A",
+        "category": "A",  // not null
         "name": "Junior",
-        "rate": 20.0
+        "rate": 20.0      // > 0
       },
       {
         "id": 20,
@@ -125,9 +126,9 @@ Following the DDD pattern, the relevant entities are:
     "employee": [
       {
         "id": 1,
-        "first_name": "Jerry",
-        "last_name": "Land",
-        "gender": "Male",
+        "first_name": "Jerry",  // not null
+        "last_name": "Land",    // not null
+        "gender": "Male",       // int/enum: {unknown|male|female}
         "description": ""
       },
       {
@@ -153,15 +154,16 @@ There are 3 corresponding tables to store the entity data loaded from the input 
   {
     "timesheet": [
       {
-        "reportId": 40,
-        "processTime": "2017-06-02T05:00:00.000Z",
-        "records": [  // corresponding to dailywork
+        "reportId": 40,   // > 0
+        "filename": "2017-01-02T05:00:00.000Z_timesheet1.csv",   // not null
+        "processTime": "2017-06-02T05:00:00.000Z",      // not null
+        "timeRecords": [  // corresponding to dailywork
           {
-            "date": "2016-11-04T04:00:00.000Z",
-            "hours": 10.0,
-            "employeeId": 1,
-            "group": "A",
-            "groupId": 10
+            "date": "2016-11-04T04:00:00.000Z",   // not null
+            "hours": 10.0,    // > 0
+            "employeeId": 1,  // > 0
+            "group": "A",     // not null
+            "groupId": 10     // > 0
           },
           {
             "date": "2016-11-14T05:00:00.000Z",
