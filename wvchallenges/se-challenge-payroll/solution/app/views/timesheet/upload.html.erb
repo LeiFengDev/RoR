@@ -1,0 +1,46 @@
+<h1>Timesheet Upload</h1>
+
+<div>
+  <h2></h2>
+<%= form_tag '/timesheet/create', { :multipart => true } do %>
+  <p>
+    <%= file_field_tag 'timesheet[filename]', :accept => 'text/csv' %>
+  </p>
+  <p>
+    <%= submit_tag "Upload" %>
+  </p>
+<% end %>
+</div>
+
+<div>
+  <h2>Timesheet Uploaded</h2>
+  <div class="Table">
+    <div class="Table-row Table-header">
+      <div class="Table-row-item">Report ID</div>
+      <div class="Table-row-item">Date</div>
+      <div class="Table-row-item">Filename</div>
+      <div class="Table-row-item">Status</div>
+      <div class="Table-row-item">Error</div>
+    </div>
+  <% if @tsStatusList.size == 0 %>
+    <div class="Table-row">
+      <div class="Table-row-item" data-header="Report ID">No uploaded timesheet yet</div>
+    </div>
+  <% else %>
+    <% @tsStatusList.each do |tStatus| %>
+    <div class="Table-row<%= " #{ "alert alert-success" unless tStatus.status != "success" }" %>">
+      <div class="Table-row-item" data-header="Report ID"><%= tStatus.report_id %></div>
+      <div class="Table-row-item" data-header="Date"><%= tStatus.process_time %></div>
+      <div class="Table-row-item" data-header="Filename"><%= filename_rm_prefix(tStatus.filename) %></div>
+
+      <div class="Table-row-item" data-header="Status"><%= tStatus.status %></div>
+      <div class="Table-row-item" data-header="Error"><%= tStatus.error unless tStatus.error == "no_error" %></div>
+    </div>
+    <% end %>
+  <% end %>
+  </div>
+</div>
+
+<div>
+  <%= link_to 'Back to payment', :controller => 'payment', :action => 'index' %>
+</div>

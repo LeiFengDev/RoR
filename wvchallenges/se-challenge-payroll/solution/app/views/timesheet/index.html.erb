@@ -1,0 +1,69 @@
+<h1>Timesheet</h1>
+
+<div>
+  <h2>Timesheet Status</h2>
+<% if @tsStatus.nil? %>
+  <div>No timesheet status record yet</div>
+<% else %>
+  <div class="<%= " #{ @tsStatus.status == "success" ? "alert alert-success" : "alert alert-danger" }" %>">
+  <% @tsStatus.attributes.reject { |attr_name, attr_value| @timeRecordAttrExcludes.include?(attr_name.to_sym) }.each do |attr_name, attr_value| %>
+    <div class="row">
+      <div class="col-xs-3">
+        <strong><%= attr_name %></strong>
+      </div>       
+      <div class="col-xs-9">
+        <% if @timeRecordAttrForceUnique.include?(attr_name.to_sym) && attr_value.is_a?(Array) %>
+          <%= attr_value.uniq %>
+        <% else %>
+          <%= attr_value %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+<% end %>
+</div>
+
+<div>
+  <h2>Timesheet Details</h2>
+  <div><strong>Report ID</strong>: <%= @timesheet.reportId %></div>
+  <div><strong>Process timestamp</strong>: <%= @timesheet.processTime.utc %></div>
+  <div class="Table">
+    <div class="Table-row Table-header">
+      <div class="Table-row-item">Line</div>
+      <div class="Table-row-item">Date</div>
+      <div class="Table-row-item">Hours</div>
+      <div class="Table-row-item">Employee ID</div>
+      <div class="Table-row-item">Group</div>
+      <div class="Table-row-item">Group ID</div>
+      <!--<div class="Table-row-item">Valid</div>-->
+    <% unless @timesheet.valid? %>
+      <div class="Table-row-item">Error</div>
+    <% end %>
+    </div>
+  <% if @timesheet.timeRecords.size == 0 %>
+    <div class="Table-row">
+      <div class="Table-row-item" data-header="Line">No time record found</div>
+    </div>
+  <% else %>
+    <% @timesheet.timeRecords.each do |tRecord| %>
+    <div class="Table-row<%= " #{ "alert alert-danger" unless tRecord.valid? }" %>">
+      <div class="Table-row-item" data-header="Line"><%= tRecord.ordinal %></div>
+      <div class="Table-row-item<%= " #{ "alert alert-danger" unless tRecord.validDate }" %>" data-header="Date"><%= tRecord.date %></div>
+      <div class="Table-row-item" data-header="Hours"><%= tRecord.hours %></div>
+      <div class="Table-row-item<%= " #{ "alert alert-danger" unless tRecord.validEmployeeId }" %>" data-header="Employee ID"><%= tRecord.employee_id %></div>
+      <div class="Table-row-item<%= " #{ "alert alert-danger" unless tRecord.validGroupId }" %>" data-header="Group"><%= tRecord.group %></div>
+      <div class="Table-row-item<%= " #{ "alert alert-danger" unless tRecord.validGroupId }" %>" data-header="Group ID"><%= tRecord.group_id %></div>
+      <!--<div class="Table-row-item" data-header="Valid"><%= tRecord.valid? %></div>-->
+      <% unless @timesheet.valid? %>
+      <div class="Table-row-item" data-header="Error"><%= tRecord.errors.full_messages unless tRecord.errors.full_messages.size == 0 %></div>
+      <% end %>
+    </div>
+    <% end %>
+  <% end %>
+  </div>
+</div>
+
+<div>
+  <%= link_to 'Back to payment', :controller => 'payment', :action => 'index' %>
+</div>
