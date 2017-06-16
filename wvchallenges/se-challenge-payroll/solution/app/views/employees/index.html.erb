@@ -10,7 +10,7 @@
 <% @employees.each do |employee| %>
   <div class="Table-row">
     <div class="Table-row-item" data-header="Employee ID"><%= employee.id %></div>
-    <div class="Table-row-item" data-header="Name"><%= employee.first_name %> <%= employee.last_name %></div>
+    <div class="Table-row-item" data-header="Name"><%= "#{employee.first_name} #{employee.last_name}" %></div>
     <div class="Table-row-item" data-header="Gender"><%= employee.gender %></div>
     <div class="Table-row-item" data-header="Description"><%= employee.description %></div>
   </div>
@@ -18,5 +18,5 @@
 </div>
 
 <div>
-  <%= link_to 'New Employee', :controller => 'employees', :action => 'new' %>
+  <%= link_to 'New employee', :controller => 'employees', :action => 'new' %>
 </div>
