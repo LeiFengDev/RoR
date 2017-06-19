@@ -3,7 +3,7 @@ class TimesheetController < ApplicationController
   rescue_from TimesheetFromCsvFile::FetchCSVFileError, with: :show_message
 
   def show_message(csv_exception)
-    flash[:error] = "IO Error"
+    #flash[:error] = "IO Error"
     @exceptionDetails = { "action" => csv_exception.inner_action, "exception" => csv_exception.inner_exception }
     
     render json: @exceptionDetails
@@ -30,7 +30,17 @@ class TimesheetController < ApplicationController
     @timesheet = Timesheet.new()
 
     # get file stream
-    uploaded_io = params[:timesheet][:filename]
+    if params.nil? || params[:timesheet].nil?
+      redirect_to :action => :upload
+      return
+    end
+    
+    uploaded_io = params[:timesheet][:filename] 
+    if uploaded_io.nil?
+      redirect_to :action => :upload
+      return
+    end
+
     # verify file stream
     @timesheet.verify!(uploaded_io)
     if @timesheet.invalidFilepath
