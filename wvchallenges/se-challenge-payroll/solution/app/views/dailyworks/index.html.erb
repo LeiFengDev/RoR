@@ -2,7 +2,7 @@
 
 <div class="Table">
   <div class="Table-row Table-header">
-    <div class="Table-row-item">Work ID</div>
+    <div class="Table-row-id-item">Work ID</div>
     <div class="Table-row-item">Employee ID</div>
     <div class="Table-row-item">Date</div>
     <div class="Table-row-item">Hours</div>
@@ -11,7 +11,7 @@
   </div>
 <% @dailyworks.each do |work| %>
   <div class="Table-row">
-    <div class="Table-row-item" data-header="Work ID"><%= work.id %></div>
+    <div class="Table-row-id-item" data-header="Work ID"><%= work.id %></div>
     <div class="Table-row-item" data-header="Employee ID"><%= work.employee_id %></div>
     <div class="Table-row-item" data-header="Date"><%= work.date %></div>
     <div class="Table-row-item" data-header="Hours"><%= work.hours %></div>
@@ -21,6 +21,6 @@
 <% end %>
 </div>
 
-<div>
+<div class="w3-btn w3-white w3-border w3-border-blue w3-round">
   <%= link_to 'New daily work', :controller => 'dailyworks', :action => 'new' %>
 </div>

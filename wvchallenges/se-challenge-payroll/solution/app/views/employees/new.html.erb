@@ -31,3 +31,7 @@
     <%= f.submit %>
   </p>
 <% end %>
+
+<div class="w3-btn w3-white w3-border w3-border-blue w3-round">
+  <%= link_to 'Back to report', :controller => 'report', :action => 'index', :default => { pay_period: 'semimonthly' } %>
+</div>

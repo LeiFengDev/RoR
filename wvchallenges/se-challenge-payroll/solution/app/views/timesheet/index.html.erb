@@ -30,7 +30,7 @@
   <div><strong>Process timestamp</strong>: <%= @timesheet.processTime.utc %></div>
   <div class="Table">
     <div class="Table-row Table-header">
-      <div class="Table-row-item">Line</div>
+      <div class="Table-row-id-item">Line</div>
       <div class="Table-row-item">Date</div>
       <div class="Table-row-item">Hours</div>
       <div class="Table-row-item">Employee ID</div>
@@ -43,12 +43,12 @@
     </div>
   <% if @timesheet.timeRecords.size == 0 %>
     <div class="Table-row">
-      <div class="Table-row-item" data-header="Line">No time record found</div>
+      <div class="Table-row-id-item" data-header="Line">No time record found</div>
     </div>
   <% else %>
     <% @timesheet.timeRecords.each do |tRecord| %>
     <div class="Table-row<%= " #{ "alert alert-danger" unless tRecord.valid? }" %>">
-      <div class="Table-row-item" data-header="Line"><%= tRecord.ordinal %></div>
+      <div class="Table-row-id-item" data-header="Line"><%= tRecord.ordinal %></div>
       <div class="Table-row-item<%= " #{ "alert alert-danger" unless tRecord.validDate }" %>" data-header="Date"><%= tRecord.date %></div>
       <div class="Table-row-item" data-header="Hours"><%= tRecord.hours %></div>
       <div class="Table-row-item<%= " #{ "alert alert-danger" unless tRecord.validEmployeeId }" %>" data-header="Employee ID"><%= tRecord.employee_id %></div>
@@ -64,6 +64,6 @@
   </div>
 </div>
 
-<div>
-  <%= link_to 'Back to payment', :controller => 'payment', :action => 'index' %>
+<div class="w3-btn w3-white w3-border w3-border-blue w3-round">
+  <%= link_to 'Back to report', :controller => 'report', :action => 'index', :default => { pay_period: 'semimonthly' } %>
 </div>
