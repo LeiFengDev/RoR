@@ -1,0 +1,29 @@
+<h1>Payment Report</h1>
+
+<div>
+  Employees: <%= @report.employeeIds.size %> / <%= @employee_total %>
+</div>
+<div>
+  Job Groups: <%= @report.workgroupIds.size %> / <%= @workgroup_total %>
+</div>
+
+<div class="Table">
+  <div class="Table-row Table-header">
+    <div class="Table-row-id-item">Employee Id</div>
+    <div class="Table-row-item">Pay Period</div>
+    <div class="Table-row-item">Amount Paid</div>
+  </div>
+<% @report.payments.each do |pay| %>
+  <% pay.pay_stubs.each do |payStub| %>
+  <div class="Table-row">
+    <div class="Table-row-id-item" data-header="Employee Id"><%= pay.employee_id %></div>
+    <div class="Table-row-item" data-header="Pay Period"><%= payStub.startDate.strftime("%d/%m/%Y") %> - <%= payStub.endDate.strftime("%d/%m/%Y") %></div>
+    <div class="Table-row-item" data-header="Amount Paid"><%= payStub.amount %></div>
+  </div>
+  <% end %>
+<% end %>
+</div>
+
+<div class="w3-btn w3-white w3-border w3-border-blue w3-round">
+  <%= link_to 'Upload timesheet', :controller => 'timesheet', :action => 'upload' %>
+</div>
