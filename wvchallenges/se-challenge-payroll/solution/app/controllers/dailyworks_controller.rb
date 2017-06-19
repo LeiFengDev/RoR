@@ -1,6 +1,6 @@
 class DailyworksController < ApplicationController
   def index
-    @dailyworks = Dailywork.all
+    @dailyworks = Dailywork.reorder(nil).all
   end
   
   def new
