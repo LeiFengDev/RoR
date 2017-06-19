@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'payment/index'
-  get 'payment' => 'payment#index'
+  get 'report/index', to: 'report#index', default: { pay_period: 'semimonthly' }
+  get 'report(/start/:start_datetime)(/end/:end_datetime)(/group/:workgroup_id)(/employee/:employee_id)(/period/:pay_period)', to: 'report#index', default: { pay_period: 'semimonthly' }
+  get 'report/json(/start/:start_datetime)(/end/:end_datetime)(/group/:workgroup_id)(/employee/:employee_id)(/period/:pay_period)', to: 'report#show_json', default: { pay_period: 'semimonthly' }
 
   get 'timesheet/index'
   get 'timesheet/upload'
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :employees, :workgroups, :dailyworks, :timesheet_status
 
-  root 'payment#index'
+  root to: 'report#index', default: { pay_period: 'semimonthly' }
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
