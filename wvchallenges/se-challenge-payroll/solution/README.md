@@ -47,11 +47,11 @@ Following the DDD pattern, the relevant entities are:
         "id": 100,
         "report_id": 40   // indexed, > 0
         "process_time": "2017-01-02T05:00:00.000Z",   // not null
-        "status": "success",  // int/enum {unknown|success|failure}
-        "error": 0,   // int/enum {no error|duplicate report|wrong format|employee not found|workgroup not found|db error|...}
-        "employees": [1,2,3,5,7,11],
-        "workgroups": [1,2],
-        "filename": "2017-01-02T05:00:00.000Z_timesheet1.csv"   // not null
+        "status": 0,  // int/enum {success|failure}
+        "error": 0,   // int/enum {no_error|filepath|content_type|duplicate_report|employee_id_not_exist|workgroup_id_not_exist|record_format_invalid|other_issue}
+        "employees": [1,2,3,5,7,11],  // ids
+        "workgroups": [1,2],        // ids
+        "filename": "20170616121252_sample.csv"   // not null
       }
     ]
   }
@@ -135,7 +135,7 @@ Following the DDD pattern, the relevant entities are:
         "id": 2,
         "name": "Larry",
         "last_name": "Ocean",
-        "gender": "unknown",
+        "gender": "Unknown",
         "description": ""
       }
     ]
@@ -155,29 +155,30 @@ There are 3 corresponding tables to store the entity data loaded from the input 
     "timesheet": [
       {
         "reportId": 40,   // > 0
-        "filename": "2017-01-02T05:00:00.000Z_timesheet1.csv",   // not null
+        "filepath": "~/solution/public/uploads/20170616121252_sample.csv",   // not null
+        "filename": "20170616121252_sample.csv",   // not null
         "processTime": "2017-06-02T05:00:00.000Z",      // not null
         "timeRecords": [  // corresponding to dailywork
           {
             "date": "2016-11-04T04:00:00.000Z",   // not null
             "hours": 10.0,    // > 0
-            "employeeId": 1,  // > 0
+            "employee_id": 1,  // > 0
             "group": "A",     // not null
-            "groupId": 10     // > 0
+            "group_id": 10     // > 0
           },
           {
             "date": "2016-11-14T05:00:00.000Z",
             "hours": 5.0,
-            "employeeId": 1,
+            "employee_id": 1,
             "group": "A",
-            "groupId": 10
+            "group_id": 10
           },
           {
             "date": "2016-11-20T05:00:00.000Z",
             "hours": 3.0,
-            "employeeId": 2,
+            "employee_id": 2,
             "group": "B",
-            "groupId": 20
+            "group_id": 20
           }
         ]
       }
@@ -201,6 +202,7 @@ There are 3 corresponding tables to store the entity data loaded from the input 
         "payStub": [
           {
             "ordinal": 1,
+            "weekNumber": "2017_01",
             "startDate": "2017-01-01T05:00:00.000Z",
             "endDate": "2017-01-15T05:00:00.000Z",
             "amount": 500,
@@ -209,6 +211,7 @@ There are 3 corresponding tables to store the entity data loaded from the input 
           },
           {
             "ordinal": 1,
+            "weekNumber": "2017_01",
             "startDate": "2017-01-01T05:00:00.000Z",
             "endDate": "2017-01-15T05:00:00.000Z",
             "amount": 300,
@@ -217,6 +220,7 @@ There are 3 corresponding tables to store the entity data loaded from the input 
           },
           {
             "ordinal": 2,
+            "weekNumber": "2017_03",
             "startDate": "2017-01-16T05:00:00.000Z",
             "endDate": "2017-01-31T05:00:00.000Z",
             "amount": 600,
@@ -230,8 +234,18 @@ There are 3 corresponding tables to store the entity data loaded from the input 
         "payStub": [
           {
             "ordinal": 1,
+            "weekNumber": "2017_01",
             "startDate": "2017-01-01T05:00:00.000Z",
             "endDate": "2017-01-15T05:00:00.000Z",
+            "amount": 750,
+            "hours": 25,
+            "rate": 30
+          },
+          {
+            "ordinal": 2,
+            "weekNumber": "2017_05",
+            "startDate": "2017-02-01T05:00:00.000Z",
+            "endDate": "2017-02-15T05:00:00.000Z",
             "amount": 750,
             "hours": 25,
             "rate": 30
@@ -245,7 +259,7 @@ There are 3 corresponding tables to store the entity data loaded from the input 
 ## MVC routing
 
 * timesheet/index
-* payment/index
+* report/index
 
 ## Dev/Test environment
 
