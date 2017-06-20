@@ -222,3 +222,51 @@ Evaluation of your submission will be based on the following criteria.
    they explained?
 1. Did you separate any concerns in your application? Why or why not?
 1. Does your solution use appropriate data types for the problem as described?
+
+
+## Build and run 
+
+1. Have your local Ruby on Rails environment ready. Current development applies the versions:
+    * Ruby 2.4.1 + Rails 5.1.1
+    * Sqlite 3.11.0
+
+  The version can be checked by terminal commands:
+  ```
+  $ rvm -v
+  rvm 1.29.1 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io/]
+
+  $ ruby -v
+  ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-linux]
+
+  $ rails -v
+  Rails 5.1.1
+
+  $ sqlite3 --version
+  3.11.0 2016-02-15 17:29:24 3d862f207e3adc00f78066799ac5a8c282430a5f
+  ```
+  Installation details please see the section 3.1 in the following link: http://guides.rubyonrails.org/getting_started.html
+
+2. Use a directory to fetch code from git repo
+  ```
+  $ cd _your_folder_path_
+  $ git clone https://github.com/LeiFengDev/RoR.git
+  ```
+3. Enter the working directory and prepare the dependencies and db tables
+  ```
+  $ cd RoR/wvchallenges/se-challenge-payroll/solution/
+  $ bundle install
+  $ bin/rails db:migrate
+  ```
+4. Run rails server
+  ```
+  $ bin/rails server
+  ```
+5. view the report page in browser with url `localhost:3000`
+
+## Hightlight 
+
+1. Ruby on Rails is a good solution for this task (see design document _solution/README.md_);
+1. The entire design is followed the _SOLID_ principle;
+1. The entities design is following _Domain Driven Design (DDD);
+1. All the models are well structured to provide self-described context and implemented with validations;
+1. Front-end (views) is open to integrate popular javascript APIs. In this version developement, bootstrap 3 is integrated; simple responsive tables and floating link buttons are globally applied.
