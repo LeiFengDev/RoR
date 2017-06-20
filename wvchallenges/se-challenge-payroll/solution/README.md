@@ -26,17 +26,13 @@ Therefore, the picked solution is consist of:
 * Ruby 2.4.1 + Rails 5.1.1
 * Sqlite 3.11.0
 
-## Configuration
-
-...
-
 ## Entity model design
 
 Following the DDD pattern, the relevant entities are:
 
 * timesheet_status
 
-  After read and imported a "time report" file, the file importing result needs to be logged into storage. MongoDB is a good choice; in this project the log will be saved into Sqlite db directly to save the cost of both db management and deploy management. The records with "status" field has success (1) value will be used to prevent same report_id file imported twice.
+  After read and imported a "time report" file, the file importing result needs to be logged into storage. MongoDB is a good choice; in this project the log will be saved into Sqlite db directly to save the cost of both db management and deploy management. The records with "status" field has success value (0) will be used to prevent same report_id file imported twice.
 
   The timesheet_status entity should look like:
 
@@ -142,7 +138,7 @@ Following the DDD pattern, the relevant entities are:
   }
   ```
 
-There are 3 corresponding tables to store the entity data loaded from the input file.
+There are 4 corresponding tables to store the entity data loaded from the input file.
 
 ## Business/view model design
 
@@ -189,10 +185,10 @@ There are 3 corresponding tables to store the entity data loaded from the input 
 * payment
 
   Model payment is the data model to keep the individual pay stubs based on selected payment reporting time period. Based on its design, it can provide various formats to the view, such as:
-  - provides daily/weekly/bi-weekly/semi-monthly/monthly payment methods based on payStub.ordinal
+  - support employee switching work group (rate)
+  - provides weekly/bi-weekly/semi-monthly/monthly payment methods based on `PayPeriod` enum and `week_number` of the period `start_date`
   - provides payment reporting period based on start and end dates
-  - provide sorting by employee or pay stub order
-  - support employee switch work group (rate)
+  - provide filtering by `employee_id` or `workgroup_id`
 
   ```
   {
@@ -259,11 +255,53 @@ There are 3 corresponding tables to store the entity data loaded from the input 
 ## MVC routing
 
 * timesheet/index
+  1. upload new CSV file into server under directory "~/public/uploads/"
+  1. verify CSV file and create status record into timesheet_statuses table
+  1. when CSV file valid load working time records into dailyworks table
+  1. display result information of the uploads
+
 * report/index
+  1. display payment report as required
+  1. provide semantic urls with proper parameters for different way to construct the payment report
 
-## Dev/Test environment
+## Build and run 
 
-...
+1. Have your local Ruby on Rails environment ready. Current development applies the versions:
+    * Ruby 2.4.1 + Rails 5.1.1
+    * Sqlite 3.11.0
+
+  The version can be checked by terminal commands:
+  ```
+  $ rvm -v
+  rvm 1.29.1 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io/]
+
+  $ ruby -v
+  ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-linux]
+
+  $ rails -v
+  Rails 5.1.1
+
+  $ sqlite3 --version
+  3.11.0 2016-02-15 17:29:24 3d862f207e3adc00f78066799ac5a8c282430a5f
+  ```
+  Installation details please see the section 3.1 in the following link: http://guides.rubyonrails.org/getting_started.html
+
+2. Use a directory to fetch code from git repo
+  ```
+  $ cd _your_folder_path_
+  $ git clone https://github.com/LeiFengDev/RoR.git
+  ```
+3. Enter the working directory and prepare the dependencies and db tables
+  ```
+  $ cd RoR/wvchallenges/se-challenge-payroll/solution/
+  $ bundle install
+  $ bin/rails db:migrate
+  ```
+4. Run rails server and view the report page in browser with url: localhost:3000
+  ```
+  $ bin/rails server
+  ```
+5. view the report page in browser with url `localhost:3000`
 
 ## Deployment and host
 
