@@ -257,11 +257,15 @@ Evaluation of your submission will be based on the following criteria.
   $ bundle install
   $ bin/rails db:migrate
   ```
-4. Run rails server
+4. Initiate Employees and Workgroups table with testing data
+  ```
+  $ bin/rake db:seed
+  ```
+5. Run rails server
   ```
   $ bin/rails server
   ```
-5. view the report page in browser with url `localhost:3000`
+6. view the report page in browser with url `localhost:3000`
 
 ## Hightlight 
 
