@@ -254,15 +254,25 @@ There are 4 corresponding tables to store the entity data loaded from the input 
 
 ## MVC routing
 
-* timesheet/index
-  1. upload new CSV file into server under directory "~/public/uploads/"
-  1. verify CSV file and create status record into timesheet_statuses table
-  1. when CSV file valid load working time records into dailyworks table
-  1. display result information of the uploads
+* **timesheet/index**: display timesheet uploading result and uploaded records
+* **timesheet/upload**: upload new CSV file into server under directory "~/public/uploads/"
+* **timesheet/create (POST)**: verify CSV file and create status record into timesheet_statuses table; when CSV file valid load working time records into dailyworks table
 
-* report/index
+* **report/index**: 
   1. display payment report as required
   1. provide semantic urls with proper parameters for different way to construct the payment report
+
+* **employees/index**: list all employee records
+* **employees/new**: provide form to add new employee record
+* **employees/create (POST)**: validate and save new employee record
+
+* **workgroups/index**: list all workgroup records
+* **workgroups/new**: provide form to add new workgroup record
+* **workgroups/create (POST)**: validate and save new workgroup record
+
+* **dailyworks/index**: list all dailywork records
+* **dailyworks/new**: provide form to add new dailywork record
+* **dailyworks/create (POST)**: validate and save new dailywork record
 
 ## Build and run 
 
@@ -297,11 +307,15 @@ There are 4 corresponding tables to store the entity data loaded from the input 
   $ bundle install
   $ bin/rails db:migrate
   ```
-4. Run rails server and view the report page in browser with url: localhost:3000
+4. Initiate Employees and Workgroups table with testing data (optional)
+  ```
+  $ bin/rake db:seed
+  ```
+5. Run rails server and view the report page in browser with url: localhost:3000
   ```
   $ bin/rails server
   ```
-5. view the report page in browser with url `localhost:3000`
+6. view the report page in browser with url `localhost:3000`
 
 ## Deployment and host
 
